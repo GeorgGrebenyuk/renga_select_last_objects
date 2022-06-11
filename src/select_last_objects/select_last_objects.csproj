@@ -70,7 +70,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="select_last_objects.rndesc" />
+    <None Include="select_last_objects.rndesc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="pic.png">
