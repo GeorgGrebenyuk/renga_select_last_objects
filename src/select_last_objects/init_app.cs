@@ -14,6 +14,10 @@ namespace select_last_objects
         //Data containers
         public static Dictionary<string, List<int>> time2selected_objects;
         private string project_path = null;
+        /// <summary>
+        /// Для предотвращения включения выбранных объектов в истории выборки по наатию на кнопку
+        /// </summary>
+        public static bool NeedIncludeSelectingToHistory = true;
 
         
         public bool Initialize(string pluginFolder)
@@ -77,7 +81,7 @@ namespace select_last_objects
             }
 
             Renga.ISelection internal_selection = renga_app.Selection;
-            if (internal_selection.GetSelectedObjects().Length > 0)
+            if (internal_selection.GetSelectedObjects().Length > 0 && NeedIncludeSelectingToHistory == true)
             {
                 List<int> current_selection = ((int[])internal_selection.GetSelectedObjects()).ToList();
                 //time pattern from http://www.geekzilla.co.uk/View00FF7904-B510-468C-A2C8-F859AA20581F.htm
@@ -87,7 +91,7 @@ namespace select_last_objects
 
         }
 
-        public static void ShowSelectedObjects (List<int> dict_indexes)
+        public static void ShowSelectedObjects (List<int> dict_indexes, int visiable_option)
         {
             List<int> needing_ids = new List<int>();
             int counter_dict = 0;
@@ -104,8 +108,26 @@ namespace select_last_objects
             }
             //needing_ids.Distinct();
             //Выделение объектов
-            Array need_ids = needing_ids.ToArray();
-            renga_app.Selection.SetSelectedObjects(need_ids);
+            if (visiable_option == 1) renga_app.Selection.SetSelectedObjects(needing_ids.ToArray());
+            else if (visiable_option >= 2)
+            {
+                Renga.IModelView modelView = renga_app.ActiveView as Renga.IModelView;
+                if (modelView != null)
+                {
+                    if (visiable_option == 2) modelView.SetObjectsVisibility(needing_ids.ToArray(), false);
+                    else
+                    {
+                        //скрыть всё кроме них
+                        Renga.IModelObjectCollection models_objects = renga_app.Project.Model.GetObjects();
+                        List<int> models_objects_ids = ((int[])models_objects.GetIds()).ToList();
+                        //List<int> other_objects_id = models_objects_ids.Except(needing_ids.ToArray()).ToList();
+
+                        modelView.SetObjectsVisibility(models_objects_ids.Except(needing_ids.ToArray()).ToArray(), false);
+                        models_objects_ids.Clear();
+                    }
+                }
+            }
+            needing_ids.Clear();
         }
         public void Stop()
         {

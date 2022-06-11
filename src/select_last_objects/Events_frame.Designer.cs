@@ -36,6 +36,10 @@ namespace select_last_objects
             this.label3 = new System.Windows.Forms.Label();
             this.action_clear = new System.Windows.Forms.Button();
             this.action_select = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.select_option_1 = new System.Windows.Forms.RadioButton();
+            this.select_option_2 = new System.Windows.Forms.RadioButton();
+            this.select_option_3 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,12 +76,13 @@ namespace select_last_objects
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(16, 320);
+            this.linkLabel1.Location = new System.Drawing.Point(16, 355);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(309, 13);
             this.linkLabel1.TabIndex = 4;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "https://github.com/GeorgGrebenyuk/renga_select_last_objects";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label3
             // 
@@ -108,12 +113,62 @@ namespace select_last_objects
             this.action_select.UseVisualStyleBackColor = true;
             this.action_select.Click += new System.EventHandler(this.action_select_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 317);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(161, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Параметры выбора объектов:";
+            // 
+            // select_option_1
+            // 
+            this.select_option_1.AutoSize = true;
+            this.select_option_1.Checked = true;
+            this.select_option_1.Location = new System.Drawing.Point(22, 334);
+            this.select_option_1.Name = "select_option_1";
+            this.select_option_1.Size = new System.Drawing.Size(114, 17);
+            this.select_option_1.TabIndex = 9;
+            this.select_option_1.TabStop = true;
+            this.select_option_1.Text = "Только выделить";
+            this.select_option_1.UseVisualStyleBackColor = true;
+            this.select_option_1.CheckedChanged += new System.EventHandler(this.select_option_1_CheckedChanged);
+            // 
+            // select_option_2
+            // 
+            this.select_option_2.AutoSize = true;
+            this.select_option_2.Location = new System.Drawing.Point(143, 334);
+            this.select_option_2.Name = "select_option_2";
+            this.select_option_2.Size = new System.Drawing.Size(63, 17);
+            this.select_option_2.TabIndex = 10;
+            this.select_option_2.TabStop = true;
+            this.select_option_2.Text = "Скрыть";
+            this.select_option_2.UseVisualStyleBackColor = true;
+            this.select_option_2.CheckedChanged += new System.EventHandler(this.select_option_2_CheckedChanged);
+            // 
+            // select_option_3
+            // 
+            this.select_option_3.AutoSize = true;
+            this.select_option_3.Location = new System.Drawing.Point(212, 334);
+            this.select_option_3.Name = "select_option_3";
+            this.select_option_3.Size = new System.Drawing.Size(92, 17);
+            this.select_option_3.TabIndex = 11;
+            this.select_option_3.TabStop = true;
+            this.select_option_3.Text = "Изолировать";
+            this.select_option_3.UseVisualStyleBackColor = true;
+            this.select_option_3.CheckedChanged += new System.EventHandler(this.select_option_3_CheckedChanged);
+            // 
             // Events_frame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(368, 345);
+            this.ClientSize = new System.Drawing.Size(368, 377);
+            this.Controls.Add(this.select_option_3);
+            this.Controls.Add(this.select_option_2);
+            this.Controls.Add(this.select_option_1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.action_select);
             this.Controls.Add(this.action_clear);
             this.Controls.Add(this.label3);
@@ -138,5 +193,9 @@ namespace select_last_objects
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button action_clear;
         private System.Windows.Forms.Button action_select;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton select_option_1;
+        private System.Windows.Forms.RadioButton select_option_2;
+        private System.Windows.Forms.RadioButton select_option_3;
     }
 }
